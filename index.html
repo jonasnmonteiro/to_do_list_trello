@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List Interativa</title>
+  <!-- Link para o arquivo CSS -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="container">
+    <form id="taskForm" aria-label="Adicionar nova tarefa">
+      <input 
+        type="text" 
+        id="taskInput"
+        class="task-input"
+        placeholder="Digite sua tarefa..."
+        aria-required="true"
+      >
+      <button type="submit" class="btn-add">+</button>
+    </form>
+    
+    <ul id="taskList" class="task-list" aria-live="polite"></ul>
+  </div>
+
+  <!-- Link para o arquivo JavaScript -->
+  <script src="index.js"></script>
+</body>
+</html>
