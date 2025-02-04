@@ -1,99 +1,57 @@
-/* Reset básico para consistência entre navegadores */
+/* Reset básico */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
   
-  /* Paleta de cores corporativa */
-  :root {
-    --primary-color: #2A5C82;
-    --secondary-color: #5DA399;
-    --background-color: #F5F7FA;
-    --text-color: #3D3D3D;
-    --white: #FFFFFF;
-  }
-  
   body {
-    font-family: 'Space Grotesk', sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    line-height: 1.6;
+    font-family: Arial, sans-serif;
+    background-color: #f4f5f7;
     padding: 20px;
   }
   
-  .container {
-    max-width: 600px;
-    margin: 0 auto;
-    background: var(--white);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .task-input {
-    width: calc(100% - 60px);
-    padding: 10px;
-    border: 2px solid var(--primary-color);
-    border-radius: 4px;
-    font-size: 16px;
-  }
-  
-  .btn-add {
-    width: 50px;
-    padding: 10px;
-    background-color: var(--primary-color);
-    color: var(--white);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .task-list {
-    list-style: none;
-    margin-top: 20px;
-  }
-  
-  .task-item {
+  .board {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 20px;
+  }
+  
+  .column {
+    background-color: #ebecf0;
+    border-radius: 4px;
+    padding: 10px;
+    width: 300px;
+  }
+  
+  .column h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .cards {
+    min-height: 100px;
+  }
+  
+  .card {
+    background-color: #fff;
+    border-radius: 4px;
     padding: 10px;
     margin-bottom: 10px;
-    background-color: var(--background-color);
-    border-radius: 4px;
-    animation: fadeIn 0.3s ease-in-out;
+    cursor: grab;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
   
-  .task-text {
-    flex-grow: 1;
-    margin-right: 10px;
-  }
-  
-  .delete-btn {
-    background: none;
+  .add-card {
+    background-color: #5aac44;
+    color: #fff;
     border: none;
-    color: var(--secondary-color);
-    font-size: 20px;
+    border-radius: 4px;
+    padding: 8px 12px;
     cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
   }
   
-  /* Animações CSS */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Responsividade */
-  @media (max-width: 600px) {
-    .task-input {
-      width: calc(100% - 50px);
-    }
+  .add-card:hover {
+    background-color: #61bd4f;
   }

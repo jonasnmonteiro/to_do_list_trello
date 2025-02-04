@@ -1,66 +1,54 @@
-const TodoApp = (() => {
-    // Cache de elementos DOM
-    const DOM = {
-      taskForm: document.getElementById('taskForm'),
-      taskInput: document.getElementById('taskInput'),
-      taskList: document.getElementById('taskList')
+// Função para permitir soltar o card
+function allowDrop(event) {
+    event.preventDefault();
+  }
+  
+  // Função para iniciar o arrasto do card
+  function drag(event) {
+    event.dataTransfer.setData("text", event.target.id);
+  }
+  
+  // Função para soltar o card
+  function drop(event) {
+    event.preventDefault();
+    const cardId = event.dataTransfer.getData("text");
+    const card = document.getElementById(cardId);
+    event.target.appendChild(card);
+    saveBoard();
+  }
+  
+  // Função para adicionar um novo card
+  function addCard(columnId) {
+    const column = document.getElementById(columnId).querySelector('.cards');
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.draggable = true;
+    card.id = `card-${Date.now()}`;
+    card.setAttribute('ondragstart', 'drag(event)');
+    card.textContent = 'Novo Card';
+    column.appendChild(card);
+    saveBoard();
+  }
+  
+  // Função para salvar o estado do quadro
+  function saveBoard() {
+    const board = {
+      todo: document.getElementById('todo').innerHTML,
+      doing: document.getElementById('doing').innerHTML,
+      done: document.getElementById('done').innerHTML
     };
+    localStorage.setItem('board', JSON.stringify(board));
+  }
   
-    // Persistência de dados com fallback para array vazio
-    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  // Função para carregar o estado do quadro
+  function loadBoard() {
+    const savedBoard = JSON.parse(localStorage.getItem('board'));
+    if (savedBoard) {
+      document.getElementById('todo').innerHTML = savedBoard.todo;
+      document.getElementById('doing').innerHTML = savedBoard.doing;
+      document.getElementById('done').innerHTML = savedBoard.done;
+    }
+  }
   
-    // Event Delegation para elementos dinâmicos
-    DOM.taskList.addEventListener('click', (e) => {
-      if (e.target.matches('.delete-btn')) {
-        const taskId = Number(e.target.closest('li').dataset.id); // Convertendo para número
-        deleteTask(taskId);
-      }
-    });
-  
-    // Função para deletar tarefas
-    const deleteTask = (id) => {
-      tasks = tasks.filter(task => task.id !== id);
-      saveToStorage();
-      renderTasks();
-    };
-  
-    // Função para salvar no localStorage
-    const saveToStorage = () => {
-      localStorage.setItem('tasks', JSON.stringify(tasks));
-    };
-  
-    // Renderização das tarefas
-    const renderTasks = () => {
-      DOM.taskList.innerHTML = tasks.map(task => `
-        <li class="task-item ${task.completed ? 'completed' : ''}" 
-            data-id="${task.id}"
-            style="animation: fadeIn 0.3s ease-in-out">
-          <span class="task-text">${task.text}</span>
-          <button class="delete-btn" aria-label="Excluir tarefa">Concluir</button>
-        </li>
-      `).join('');
-    };
-  
-    // Inicialização do app
-    return {
-      init: () => {
-        DOM.taskForm.addEventListener('submit', (e) => {
-          e.preventDefault();
-          if (DOM.taskInput.value.trim()) {
-            tasks.push({
-              id: Date.now(), // Garantindo que o ID seja único
-              text: DOM.taskInput.value.trim(),
-              completed: false
-            });
-            DOM.taskInput.value = '';
-            saveToStorage();
-            renderTasks();
-          }
-        });
-        renderTasks();
-      }
-    };
-  })();
-  
-  // Inicializa a aplicação
-  TodoApp.init();
+  // Carregar o quadro ao iniciar
+  loadBoard();

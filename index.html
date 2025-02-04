@@ -3,27 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To-Do List Interativa</title>
-  <!-- Link para o arquivo CSS -->
+  <title>Quadro Kanban</title>
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
-  <div class="container">
-    <form id="taskForm" aria-label="Adicionar nova tarefa">
-      <input 
-        type="text" 
-        id="taskInput"
-        class="task-input"
-        placeholder="Digite sua tarefa..."
-        aria-required="true"
-      >
-      <button type="submit" class="btn-add">+</button>
-    </form>
-    
-    <ul id="taskList" class="task-list" aria-live="polite"></ul>
+  <div class="board">
+    <!-- Coluna "A Fazer" -->
+    <div class="column" id="todo">
+      <h2>A Fazer</h2>
+      <div class="cards" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      <button class="add-card" onclick="addCard('todo')">+ Adicionar Card</button>
+    </div>
+
+    <!-- Coluna "Fazendo" -->
+    <div class="column" id="doing">
+      <h2>Fazendo</h2>
+      <div class="cards" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      <button class="add-card" onclick="addCard('doing')">+ Adicionar Card</button>
+    </div>
+
+    <!-- Coluna "Feito" -->
+    <div class="column" id="done">
+      <h2>Feito</h2>
+      <div class="cards" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      <button class="add-card" onclick="addCard('done')">+ Adicionar Card</button>
+    </div>
   </div>
 
-  <!-- Link para o arquivo JavaScript -->
   <script src="index.js"></script>
 </body>
 </html>
