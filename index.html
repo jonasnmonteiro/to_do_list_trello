@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quadro Kanban</title>
-  <link rel="stylesheet" href="index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Trello-like</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="board">
@@ -30,6 +30,28 @@
     </div>
   </div>
 
-  <script src="index.js"></script>
+    <!-- Modal Structure -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Editar Card</h2>
+            <textarea id="card-description" placeholder="Descrição..."></textarea>
+            
+            <h3>Etiquetas</h3>
+            <div class="labels">
+                <button class="label red" data-color="red">Urgente</button>
+                <button class="label blue" data-color="blue">Em Progresso</button>
+                <button class="label green" data-color="green">Concluído</button>
+            </div>
+
+            <h3>Checklist</h3>
+            <ul id="checklist"></ul>
+            <button id="add-task">➕ Nova Tarefa</button>
+            
+            <button id="save-changes">💾 Salvar Alterações</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
